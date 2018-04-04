@@ -11,6 +11,7 @@ const UserHome = { template: '<div>User Home</div>' }
 
 const routes = [
   { path: '/user/:id',
+    name: 'user',
     component: User,
     children: [
       {
