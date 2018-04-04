@@ -3,14 +3,30 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-const Foo = { template: '<div>Foo</div>' }
-const Bar = { template: '<div>Bar</div>' }
-const User = { template: '<div>User {{ $route.params.id }} </div>' }
+const User = { template: '<div>User {{ $route.params.id }} <router-view></router-view></div>' }
+
+const UserProfile = { template: '<div>User Profile</div>' }
+const UserPost = { template: '<div>User Post</div>' }
+const UserHome = { template: '<div>User Home</div>' }
 
 const routes = [
-  { path: '/foo', component: Foo },
-  { path: '/bar', component: Bar },
-  { path: '/user/:id', component: User }
+  { path: '/user/:id',
+    component: User,
+    children: [
+      {
+        path: 'profile',
+        component: UserProfile
+      },
+      {
+        path: 'post',
+        component: UserPost
+      },
+      {
+        path: '',
+        component: UserHome
+      }
+    ]
+  }
 ]
 
 const router = new VueRouter({
